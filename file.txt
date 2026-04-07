@@ -1,0 +1,54 @@
+╭─── Claude Code v2.1.92 ──────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                Welcome back Ashish!                │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│      Sonnet 4.6 · Claude Pro ·                     │                         │
+│      ashish.ashi6388@gmail.com's Organization      │                         │
+│ D:\Claude Code Campus X\expense-tracker\expense-t… │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ What is this project about?                                                   
+
+  Searched for 1 pattern, read 4 files (ctrl+o to expand)
+
+● This is Spendly — a personal expense tracker web application built with Flask
+  and SQLite. It's a student learning project (Campus X course), structured as a
+   step-by-step tutorial.
+
+  What it does:
+  - Lets users register/login and track personal expenses
+  - Categorizes spending (Food, Bills, Health, Transport, etc.)
+  - Shows monthly summaries and spending patterns
+  - Supports filtering by date range
+
+  Current state:
+  - The UI shell is in place — landing page, login, register templates with
+  CSS/JS
+  - app.py has route stubs, but most features are marked "coming in Step X"
+  - database/db.py is empty — students are meant to implement get_db(),
+  init_db(), and seed_db() as part of the exercises
+  - Stack: Flask + SQLite + Werkzeug, with pytest for testing
+
+  It's essentially a guided starter project where students build out the full
+  app step by step — database setup, auth, CRUD for expenses, and so on.
+
+❯ What is the tech stack?                                                       
+
+● Backend:
+  - Python + Flask (web framework)
+  - SQLite (database, via Python's built-in sqlite3)
+  - Werkzeug (password hashing / auth utilities)
+
+  Frontend:
+  - Jinja2 templates (HTML templating, built into Flask)
+  - Vanilla CSS (static/css/style.css)
+  - Vanilla JavaScript (static/js/main.js)
+
+  Testing:
+  - pytest + pytest-flask
+
+  No external database, no ORM, no frontend framework — intentionally minimal
+  for a learning project.
