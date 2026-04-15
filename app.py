@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for, request, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 from database.db import get_db, init_db, seed_db
 
 app = Flask(__name__)
+app.secret_key = "dev-secret"
 
 
 # ------------------------------------------------------------------ #
@@ -13,14 +15,64 @@ def landing():
     return render_template("landing.html")
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    if request.method == "GET":
+        return render_template("register.html")
+
+    name = request.form.get("name", "").strip()
+    email = request.form.get("email", "").strip()
+    password = request.form.get("password", "")
+    confirm_password = request.form.get("confirm_password", "")
+
+    if not name or not email or not password or not confirm_password:
+        return render_template("register.html", error="All fields are required.", name=name, email=email)
+
+    if len(password) < 8:
+        return render_template("register.html", error="Password must be at least 8 characters.", name=name, email=email)
+
+    if password != confirm_password:
+        return render_template("register.html", error="Passwords do not match.", name=name, email=email)
+
+    conn = get_db()
+    existing = conn.execute("SELECT id FROM users WHERE email = ?", (email,)).fetchone()
+    if existing:
+        conn.close()
+        return render_template("register.html", error="An account with that email already exists.", name=name, email=email)
+
+    conn.execute(
+        "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
+        (name, email, generate_password_hash(password))
+    )
+    conn.commit()
+    conn.close()
+
+    flash("Account created successfully! Please sign in.", "success")
+    return redirect(url_for("login"))
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    if request.method == "GET":
+        return render_template("login.html")
+
+    email = request.form.get("email", "").strip()
+    password = request.form.get("password", "")
+
+    if not email or not password:
+        return render_template("login.html", error="All fields are required.")
+
+    conn = get_db()
+    user = conn.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+    conn.close()
+
+    if not user or not check_password_hash(user["password_hash"], password):
+        return render_template("login.html", error="Invalid email or password.")
+
+    session["user_id"] = user["id"]
+    session["user_name"] = user["name"]
+
+    return redirect(url_for("expenses"))
 
 
 # ------------------------------------------------------------------ #
@@ -35,6 +87,11 @@ def terms():
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
+
+
+@app.route("/expenses")
+def expenses():
+    return "Dashboard — coming in Step 5"
 
 
 @app.route("/logout")
