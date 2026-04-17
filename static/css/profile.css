@@ -1,0 +1,365 @@
+/* ------------------------------------------------------------------ */
+/* Profile page                                                        */
+/* ------------------------------------------------------------------ */
+
+.profile-page {
+    padding: 3rem 2rem 5rem;
+}
+
+.profile-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Page header                                                         */
+/* ------------------------------------------------------------------ */
+
+.profile-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+}
+
+.profile-subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* Identity card                                                       */
+/* ------------------------------------------------------------------ */
+
+.profile-identity-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.profile-identity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--ink);
+}
+
+.profile-email {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.profile-email svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.profile-member-since {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.1rem;
+}
+
+.profile-member-since svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Stats row                                                           */
+/* ------------------------------------------------------------------ */
+
+.profile-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.profile-stat-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.profile-stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-stat-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.profile-stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.profile-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Content grid (table + breakdown)                                    */
+/* ------------------------------------------------------------------ */
+
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ------------------------------------------------------------------ */
+/* Transaction table section                                           */
+/* ------------------------------------------------------------------ */
+
+.profile-tx-section,
+.profile-breakdown-section {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.profile-section-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-section-header svg {
+    width: 16px;
+    height: 16px;
+    color: var(--ink-muted);
+}
+
+.profile-section-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.profile-tx-table-wrap {
+    overflow-x: auto;
+}
+
+.profile-tx-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.profile-tx-table thead th {
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border-soft);
+    white-space: nowrap;
+}
+
+.profile-tx-table thead th.col-amount {
+    text-align: right;
+}
+
+.profile-tx-table tbody tr {
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.15s;
+}
+
+.profile-tx-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.profile-tx-table tbody tr:hover {
+    background: var(--paper);
+}
+
+.profile-tx-table tbody td {
+    padding: 0.85rem 1.5rem;
+    color: var(--ink-soft);
+    vertical-align: middle;
+}
+
+.profile-tx-table tbody td.col-amount {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.profile-tx-date {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+}
+
+.profile-tx-desc {
+    font-weight: 500;
+    color: var(--ink);
+}
+
+/* ------------------------------------------------------------------ */
+/* Category badges                                                     */
+/* ------------------------------------------------------------------ */
+
+.badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+
+.badge-food         { background: var(--accent-light);   color: var(--accent); }
+.badge-bills        { background: var(--accent-2-light);  color: var(--accent-2); }
+.badge-shopping     { background: var(--paper-warm);      color: var(--ink-soft); }
+.badge-health       { background: var(--success-light);   color: var(--success); }
+.badge-entertainment{ background: var(--accent-light);    color: var(--accent); }
+.badge-transport    { background: var(--border-soft);     color: var(--ink-muted); }
+.badge-other        { background: var(--paper-warm);      color: var(--ink-muted); }
+
+/* ------------------------------------------------------------------ */
+/* Category breakdown                                                  */
+/* ------------------------------------------------------------------ */
+
+.profile-breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.profile-breakdown-row {
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.profile-breakdown-row:last-child {
+    border-bottom: none;
+}
+
+.profile-breakdown-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.45rem;
+}
+
+.profile-breakdown-cat {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+.profile-breakdown-amt {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.profile-bar-track {
+    height: 5px;
+    background: var(--border-soft);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.profile-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+    .profile-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-page {
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    .profile-identity-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
