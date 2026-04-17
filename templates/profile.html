@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile — Spendly{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+    <div class="profile-inner">
+
+        <!-- Page header -->
+        <div class="profile-header">
+            <h1 class="profile-title">My Profile</h1>
+            <p class="profile-subtitle">Your account details and spending overview</p>
+        </div>
+
+        <!-- Identity card -->
+        <div class="profile-identity-card">
+            <div class="profile-avatar">{{ user.initials }}</div>
+            <div class="profile-identity-info">
+                <div class="profile-name">{{ user.name }}</div>
+                <div class="profile-email">
+                    <i data-lucide="mail"></i>
+                    {{ user.email }}
+                </div>
+                <div class="profile-member-since">
+                    <i data-lucide="calendar"></i>
+                    Member since {{ user.member_since }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="profile-stats-row">
+            {% for stat in stats %}
+            <div class="profile-stat-card">
+                <div class="profile-stat-icon">
+                    <i data-lucide="{{ stat.icon }}"></i>
+                </div>
+                <div class="profile-stat-label">{{ stat.label }}</div>
+                <div class="profile-stat-value">{{ stat.value }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Content grid: transactions + breakdown -->
+        <div class="profile-content-grid">
+
+            <!-- Transaction history -->
+            <div class="profile-tx-section">
+                <div class="profile-section-header">
+                    <i data-lucide="clock"></i>
+                    <span class="profile-section-title">Recent Transactions</span>
+                </div>
+                <div class="profile-tx-table-wrap">
+                    <table class="profile-tx-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th class="col-amount">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tx in transactions %}
+                            <tr>
+                                <td class="profile-tx-date">{{ tx.date }}</td>
+                                <td class="profile-tx-desc">{{ tx.description }}</td>
+                                <td>
+                                    <span class="badge badge-{{ tx.category | lower }}">{{ tx.category }}</span>
+                                </td>
+                                <td class="col-amount">{{ tx.amount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Category breakdown -->
+            <div class="profile-breakdown-section">
+                <div class="profile-section-header">
+                    <i data-lucide="pie-chart"></i>
+                    <span class="profile-section-title">By Category</span>
+                </div>
+                <div class="profile-breakdown-list">
+                    {% for cat in categories %}
+                    <div class="profile-breakdown-row">
+                        <div class="profile-breakdown-meta">
+                            <span class="profile-breakdown-cat">{{ cat.name }}</span>
+                            <span class="profile-breakdown-amt">{{ cat.amount }}</span>
+                        </div>
+                        <div class="profile-bar-track">
+                            <div class="profile-bar-fill" style="width: {{ cat.pct }}%"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
